@@ -249,7 +249,7 @@ This project is pre-configured for **zero-error Vercel deployment** across all p
 2. **Deploy Steps**
    - Push to GitHub/GitLab/Bitbucket and import the repository in the Vercel Dashboard, **or** run `vercel --prod` from the project root using the Vercel CLI.
    - Keep the defaults from `vercel.json` (do not override Output Directory or Install Command).
-   - Ensure Node.js version is `20.x` or `22.x` in Vercel Project Settings (`"engines": { "node": ">=20.0.0" }` is declared in `package.json`).
+   - Ensure Node.js version is `22.x` in Vercel Project Settings (`"engines": { "node": "22.x" }` is declared in `package.json`).
 3. **Persistence & Realtime Behavior on Vercel**
    - **Without Aiven environment variables**: StoreStream boots cleanly in `DEMO_MODE` using writable `/tmp/storestream.db` (zero `EROFS` read-only errors) and automatically switches `/api/health` to `realtimeTransport: "http"` so the storefront polls cleanly without WebSocket errors. Note that `/tmp` persists across warm serverless invocations and resets on cold starts.
    - **With Aiven environment variables**: Add `DATABASE_URL`, `KAFKA_BROKERS`, `KAFKA_USERNAME`, `KAFKA_PASSWORD`, `KAFKA_SSL`, `OPENSEARCH_NODE`, `OPENSEARCH_USERNAME`, `OPENSEARCH_PASSWORD`, and `JWT_SECRET` in Vercel **Project Settings → Environment Variables** for durable production state.
