@@ -1,0 +1,18 @@
+# Local runtime databases and uploaded assets
+data/
+public/uploads/
+public/assets/aistudio/
+
+# Tests and local container orchestration
+tests/
+docker-compose.yml
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs and build artifacts
+*.log
+coverage/
+dist/

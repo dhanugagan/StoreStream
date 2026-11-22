@@ -1,0 +1,61 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 1,
+    "analysis": {
+      "analyzer": {
+        "storestream_autocomplete": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": ["lowercase", "edge_ngram_filter"]
+        }
+      },
+      "filter": {
+        "edge_ngram_filter": {
+          "type": "edge_ngram",
+          "min_gram": 2,
+          "max_gram": 15
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "product_id": { "type": "keyword" },
+      "sku": { "type": "keyword" },
+      "product_name": {
+        "type": "text",
+        "analyzer": "standard",
+        "fields": {
+          "autocomplete": {
+            "type": "text",
+            "analyzer": "storestream_autocomplete",
+            "search_analyzer": "standard"
+          },
+          "keyword": { "type": "keyword" }
+        }
+      },
+      "description": { "type": "text" },
+      "category": { "type": "keyword" },
+      "brand": { "type": "keyword" },
+      "price": { "type": "double" },
+      "discount_pct": { "type": "integer" },
+      "rating": { "type": "double" },
+      "popularity": { "type": "integer" },
+      "available_stock": { "type": "integer" },
+      "city_availability": {
+        "type": "object",
+        "properties": {
+          "Bengaluru": { "type": "integer" },
+          "Mumbai": { "type": "integer" },
+          "Delhi NCR": { "type": "integer" },
+          "Hyderabad": { "type": "integer" },
+          "Chennai": { "type": "integer" },
+          "Pune": { "type": "integer" }
+        }
+      },
+      "tags": { "type": "keyword" },
+      "updated_at": { "type": "date" }
+    }
+  }
+}
